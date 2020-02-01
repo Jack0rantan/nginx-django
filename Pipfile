@@ -8,6 +8,11 @@ verify_ssl = true
 [packages]
 django = "*"
 bs4 = "*"
+lxml = "*"
+selenium = "*"
+requests = "*"
+chromedriver-binary = "==79.0.3945.130"
+79-0-3945-130 = "*"
 
 [requires]
 python_version = "3.8"
