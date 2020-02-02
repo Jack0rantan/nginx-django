@@ -7,6 +7,7 @@ import re, json
 import urllib
 from bs4 import BeautifulSoup
 
+ 
 def verifyString(res):
     res = res.replace("(", "")
     res = res.replace(")", "")
@@ -114,48 +115,62 @@ def bs4(url):
     
     return soup
 
-@ensure_csrf_cookie
 def index(request):
-    account = "hyo_tam"
-    url = "https://twitcasting.tv/" + str(account)
     
-    # res : soup
-    soupTop = bs4(url)
-    resAllCoin = getAllCoin(soupTop)
+    account = ''
     
-    allCoin = resAllCoin["coin_n"]
-    count = 0; page_i = 0; limitPage = 30; res = {}; res["coinuserinfo"] = {}
+    # アカウント名が未入力
+    if request.GET.get("account") is None:
+        message = "アカウント名を入力してください"
+        return render(request, "index.html",{"message": message})
     
-    ## loop in AllCoin
-    while int(allCoin) > int(count):
-        # get GiftPage
-        giftUrl = "https://twitcasting.tv/" + str(account) + "/gifts/" + str(page_i)
-        soupGift = bs4(giftUrl)
-        # search coin
-        resEachCoin, resCount, flg = getEachCoin(account, soupGift, page_i)
-        print("now", page_i, resCount)
-        try:
-            # find Expired-coin
-            if flg == False:
-                print("find expired Coin")
-                break
-            else:
-                if resEachCoin == []:
-                    page_i += 1
-                    continue
-                res["coinuserinfo"]["page" + str(page_i)] = resEachCoin
-                count += resCount
-                page_i += 1
-                # limit page 
-            if page_i > limitPage:
-                break
-        except Exception as e:
-            return JsonResponse("not find")
+    else:
+        account = request.GET.get("account")
+        print(account)
         
-    res["allcoin"] = resAllCoin["coin_n"]
-    # res["coinuserinfo"] = resEachCoin
-    return JsonResponse(res)
-
-if __name__ == "__main__":
-    # req["account"] = "hyo_tam"
-    index("hyo_tam")
+        # account = "hyo_tam"
+        url = "https://twitcasting.tv/" + str(account)
+        
+        # Scraping
+        try:
+            soupTop = bs4(url)
+            resAllCoin = getAllCoin(soupTop)
+        except:
+            message = "アカウント名が正しくない可能性があります。検索に失敗しました。"
+            return render(request, "index.html", {"message": message})
+            
+        allCoin = resAllCoin["coin_n"]
+        count = 0; page_i = 0; limitPage = 30; res = {}; res["coinuserinfo"] = {}
+        
+        ## loop in AllCoin
+        while int(allCoin) > int(count):
+            
+            # get GiftPage
+            giftUrl = "https://twitcasting.tv/" + str(account) + "/gifts/" + str(page_i)
+            soupGift = bs4(giftUrl)
+        
+            # search coin
+            resEachCoin, resCount, flg = getEachCoin(account, soupGift, page_i)
+            print("now", page_i, resCount)
+            try:
+                # find Expired-coin
+                if flg == False:
+                    print("find expired Coin")
+                    break
+                else:
+                    if resEachCoin == []:
+                        page_i += 1
+                        continue
+                    res["coinuserinfo"]["page" + str(page_i)] = resEachCoin
+                    count += resCount
+                    page_i += 1
+        
+                # limit page 
+                if page_i > limitPage:
+                    break
+            except Exception as e:
+                return JsonResponse("not find")
+            
+        res["allcoin"] = resAllCoin["coin_n"]
+        
+        return render(request, "index.html", res)

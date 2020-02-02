@@ -1,0 +1,56 @@
+/* default  */
+body {
+    background: rgb(231,200,252);
+    background: linear-gradient(223deg, rgba(231,200,252,1) 0%, rgba(235,255,195,1) 64%, rgba(217,244,250,1) 100%);
+}
+
+p {
+    margin: 5px;
+    padding: 10px;
+}
+
+h1 {
+    font-family: 'Josefin Sans', 'Sawarabi Gothic', sans-serif;
+    font-size: 40px;
+}
+
+/* adjust */
+.rifht-align {
+    text-align: right;
+}
+
+/* enhance */
+.en1 {
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+}
+.en2 {
+    margin: 5px;
+    padding: 10px;
+    font-size: 30px;
+}
+.caution {
+    color: red;
+}
+
+/* margin */
+.margin-box1 {
+    margin: 20px;
+    padding: 20px;
+    background-color: transparent;
+}
+
+/* font  */
+.font-MF {
+    font-family: 'Miss Fajardose', 'M PLUS Rounded 1c', cursive;
+}
+.font-JS{
+    font-family: 'Josefin Sans', 'M PLUS Rounded 1c', sans-serif;
+}
+.font-SW{
+    font-family: 'Sawarabi Gothic', sans-serif;
+}
+.font-MP{
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
