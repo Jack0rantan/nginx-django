@@ -5,6 +5,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 import re, json
 import urllib
+import urllib.request
 from bs4 import BeautifulSoup
 
  
@@ -115,17 +116,17 @@ def bs4(url):
     
     return soup
 
-def index(request):
+def index(req):
     
     account = ''
     
     # アカウント名が未入力
-    if request.GET.get("account") is None:
+    if req.GET.get("account") is None:
         message = "アカウント名を入力してください"
-        return render(request, "index.html",{"message": message})
+        return render(req, "index.html",{"message": message})
     
     else:
-        account = request.GET.get("account")
+        account = req.GET.get("account")
         print(account)
         
         # account = "hyo_tam"
@@ -135,9 +136,10 @@ def index(request):
         try:
             soupTop = bs4(url)
             resAllCoin = getAllCoin(soupTop)
-        except:
+        except Exception as e:
+            print(e)
             message = "アカウント名が正しくない可能性があります。検索に失敗しました。"
-            return render(request, "index.html", {"message": message})
+            return render(req, "index.html", {"message": message})
             
         allCoin = resAllCoin["coin_n"]
         count = 0; page_i = 0; limitPage = 30; res = {}; res["coinuserinfo"] = {}
@@ -173,4 +175,4 @@ def index(request):
             
         res["allcoin"] = resAllCoin["coin_n"]
         
-        return render(request, "index.html", res)
+        return render(req, "index.html", res)
