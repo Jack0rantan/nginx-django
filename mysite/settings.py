@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6wl_tz-r8&a_%l2m2fa5=0m!le0&_dfde#b&(zi*=e)r$xk=zk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["www.dawn-desert.com", "localhost"]
 
@@ -119,9 +119,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT = "/home/ubuntu/mysite/static/"
+
+#------------------#
+#    for Devlop
+#------------------#
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/home/ubuntu/mysite/static/'
-]
+
+#------------------#
+#    for Deploy
+#------------------#
+# STATIC_ROOT = "/home/ubuntu/mysite/static/"
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     '/home/ubuntu/mysite/static/'
+# ]
