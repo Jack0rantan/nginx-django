@@ -6,8 +6,8 @@
 - 3rd, please restart uwsgi & nginx like below
 
 <details><summary>resart command</summary><div>
-\```shell
+```bash
 sudo systemctl restart uwsgi
 sudo /etc/init.d/nginx restart
-\```
+```
 </div></details>
