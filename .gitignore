@@ -3,3 +3,6 @@
 *.ipynb
 
 *.pyc
+
+# develop -> deploy
+mysite/settings.py
