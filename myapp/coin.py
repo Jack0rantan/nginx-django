@@ -7,12 +7,12 @@ from bs4 import BeautifulSoup
 
 class CoinController:
 
-    def verifyString(res):
-        res = res.replace("(", "")
-        res = res.replace(")", "")
-        res = res.replace("'", "")
-        res = res.replace(";", "")  
-        return res
+    # def verifyString(res):
+    #     res = res.replace("(", "")
+    #     res = res.replace(")", "")
+    #     res = res.replace("'", "")
+    #     res = res.replace(";", "")  
+    #     return res
 
     def getEachCoin(account, soup, pageNum):
         ### initialVelification ###
@@ -31,7 +31,11 @@ class CoinController:
                 tableitem = soup.find('td', class_='tw-gift-table-item')
                 item = tableitem.find('a').attrs['href']
                 item = item.replace("javascript:showItemDialog", "")
-                item = verifyString(item)
+                
+                item = item.replace("(", "")
+                item = item.replace(")", "")
+                item = item.replace("'", "")
+                item = item.replace(";", "")
                 
                 res_user = {}
                 status = str(tableitem.find('div').text)
