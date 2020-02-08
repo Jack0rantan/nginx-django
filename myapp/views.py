@@ -116,7 +116,7 @@ def bs4(url):
     
     return soup
 
-def index(req):
+def coin(req):
     
     account = ''
     
@@ -175,4 +175,7 @@ def index(req):
             
         res["allcoin"] = resAllCoin["coin_n"]
         
-        return render(req, "index.html", res)
+        return render(req, "coin.html", res)
+
+def index(req):
+    return render(req, "index.html")
