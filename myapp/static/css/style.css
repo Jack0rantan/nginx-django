@@ -30,6 +30,10 @@ h1 {
     padding: 10px;
     font-size: 30px;
 }
+.en3 {
+    color: #d30046e8;
+    font-size: 30px;
+}
 .caution {
     color: red;
 }
@@ -37,6 +41,11 @@ h1 {
 /* margin */
 .margin-box1 {
     margin: 20px;
+    padding: 20px;
+    background-color: transparent;
+}
+.margin-box2 {
+    margin: 80px;
     padding: 20px;
     background-color: transparent;
 }
