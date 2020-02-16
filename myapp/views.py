@@ -21,9 +21,9 @@ def coin(req):
     account = ''
     
     # アカウント名が未入力
-    if req.GET.get("account") is None:
-        message = "アカウント名を入力してください"
-        return render(req, "index.html",{"message": message})
+    if req.GET.get("account") is None or req.GET.get("account") == '':
+        caution = "アカウント名を入力してください"
+        return render(req, "coin.html",{"caution": caution})
     
     else:
         account = req.GET.get("account")
@@ -38,8 +38,8 @@ def coin(req):
             resAllCoin = CC.getAllCoin(soupTop)
         except Exception as e:
             print(e)
-            message = "アカウント名が正しくない可能性があります。検索に失敗しました。"
-            return render(req, "index.html", {"message": message})
+            caution = "アカウント名が正しくない可能性があります。検索に失敗しました。"
+            return render(req, "coin.html", {"caution": caution})
             
         allCoin = resAllCoin["coin_n"]
         count = 0; page_i = 0; limitPage = 30; res = {}; res["coinuserinfo"] = {}
