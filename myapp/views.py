@@ -6,6 +6,7 @@ import re, json
 import urllib
 import urllib.request
 from bs4 import BeautifulSoup
+import datetime
 
 from .coin import CoinController as CC
 
@@ -15,7 +16,8 @@ def index(req):
 
 
 def coin(req):
-    
+    now = datetime.datetime.now() + datetime.timedelta(hours=9)
+    now = now.replace(microsecond=0)
     account = ''
     
     # アカウント名が未入力
@@ -50,7 +52,7 @@ def coin(req):
             soupGift = CC.bs4(giftUrl)
         
             # search coin
-            resEachCoin, resCount, flg = CC.getEachCoin(account, soupGift, page_i)
+            resEachCoin, resCount, flg = CC.getEachCoin(account, soupGift, page_i, now)
             print("page", page_i,"countCoin", resCount, "page", giftUrl)
             try:
                 # find Expired-coin

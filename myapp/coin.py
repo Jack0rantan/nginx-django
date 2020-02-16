@@ -4,6 +4,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 import re, json
 import urllib
 from bs4 import BeautifulSoup
+import datetime
 
 class CoinController:
 
@@ -14,7 +15,7 @@ class CoinController:
     #     res = res.replace(";", "")  
     #     return res
 
-    def getEachCoin(account, soup, pageNum):
+    def getEachCoin(account, soup, pageNum, now):
         ### initialVelification ###
         soup = soup.find('table', class_='tw-basic-table tw-gift-table')
         # soup = soup.find('ul', class_='tw-item-icon-list')
@@ -71,6 +72,13 @@ class CoinController:
                     ## coin get time
                     time = userinfo.find('time', class_="tw-gift-table-date")
                     res_user["time"] = str(time.text)
+                    ## coin get time substrat
+                    td = datetime.datetime.strptime(str(time.text), '%Y/%m/%d %H:%M:%S')
+                    if res_user["coin"] == 5:
+                        un = td + datetime.timedelta(days=5)
+                    else:
+                        un = td + datetime.timedelta(days=3)
+                    res_user["sbst"] = str(un - now)
                     ## coin status
                     status = status.replace("Expire Date                                        ", "")
                     res_user["status"] = status
