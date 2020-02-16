@@ -49,19 +49,19 @@ class CoinController:
                         if re.search(r'Expired', status):
                             res_user["coin"] = 0
                             res_user["status"] = "Expired-CoinBaku"
+                            res.append(res_user)
+                            flgCoin = False
+                            return res, int(99999999), flgCoin
                         else:
                             res_user["coin"] = 5
                             count += 5
                     else:
                         ## check expired-Coin
                         if re.search(r'Expired', status):
-                            res_user["coin"] = 0
-                            res_user["status"] = "Expired-Coin"
-                            res.append(res_user)
-                            flgCoin = False
-                            return res, int(99999999), flgCoin
-                        res_user["coin"] = 1
-                        count += 1
+                            continue
+                        else:
+                            res_user["coin"] = 1
+                            count += 1
                         
                     ## add user info 
                     ## user-name
