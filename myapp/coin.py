@@ -82,6 +82,9 @@ class CoinController:
                     ## coin status
                     status = status.replace("Expire Date                                        ", "")
                     res_user["status"] = status
+                    ## Expired time
+                    vtime = td
+                    res_user["vtime"] = str(vtime)[5:]
                     
                     # shaping for return
                     res.append(res_user)
