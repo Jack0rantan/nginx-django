@@ -20,15 +20,15 @@ TwicasCoin Searcher
       <h2 class="en2 font-MP"> 1. Twicasのアカウント名を入力しよう！ </h2> 
       
       <div class="row text-left">
-        <div class="col-md-2"></div>
-        <div class="col-md-7">
+        <div class="col-md-3"></div>
+        <div class="col-md-4">
           <form id="form1" action="coin" method="GET">
-            <input id="sbox1" id="s" name="account" type="text" placeholder="アカウント名を入力" value=""/>
+            <input id="sbox1" id="s" name="account" type="text" placeholder="アカウント名" value="" style="width:130px;"/>
             <input id="sbtn1" type="submit" value="検索"/>
           </form>
         </div>
         <!-- caution for Exception -->
-        <div class="col-md-3 caution">
+        <div class="col-md-5 caution">
           {{ caution }}
         </div>
       </div>
@@ -37,11 +37,11 @@ TwicasCoin Searcher
       <p></p>
       <h2 class="en2 font-MP"> 2. 検索結果</h2>
       <div class="row text-left">
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
         <div class="col-md-7">
           <p class="en1 font-MP"> 現在の保有コイン数：<strong class="en3"> {{ allcoin }} </strong></p>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
       </div>
       <!-- Display each Search-Result -->
       <table class="table font-JS">
@@ -50,7 +50,7 @@ TwicasCoin Searcher
             <th scope="col">name</th>
             <th scope="col">coin</th>
             <th scope="col">left-time</th>
-            <th scope="col">Expired-time</th>
+            <th scope="col">expired-time</th>
           </tr>
         </thead>
         <tbody>
