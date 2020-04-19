@@ -73,7 +73,7 @@ class CoinController:
                     time = userinfo.find('time', class_="tw-gift-table-date")
                     res_user["time"] = str(time.text)
                     ## coin get time substrat
-                    td = datetime.datetime.strptime(str(time.text), '%Y/%m/%d %H:%M:%S')
+                    td = datetime.datetime.strptime(str(time.text), '%Y/%m/%d %H:%M')
                     if res_user["coin"] == 5:
                         un = td + datetime.timedelta(days=5)
                     else:
